@@ -8,13 +8,33 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class Utility {
+
+    public static String[] readStringArrayFromFile(String fileName) {
+        String[] data = null;
+        try (
+                InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Utility.class.getClassLoader().getResourceAsStream(fileName)));
+                BufferedReader br = new BufferedReader(isr)
+        ) {
+            int stringsCount = Integer.parseInt(br.readLine().trim());
+            data = new String[stringsCount];
+            for (int index = 0; index < stringsCount; index++) {
+                data[index] = br.readLine().trim();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 
     public static int[] readIntArrayFromFile(String fileName) {
         int[] data = null;
         try (
-                InputStreamReader isr = new InputStreamReader(NewYearChaos.class.getClassLoader().getResourceAsStream(fileName));
+                InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Utility.class.getClassLoader().getResourceAsStream(fileName)));
                 BufferedReader br = new BufferedReader(isr)
         ) {
             String[] dataStrArray = br.readLine().trim().split(" ");
@@ -33,7 +53,7 @@ public class Utility {
     public static int[][] readInt2DArrayFromFile(String fileName) {
         int[][] data = null;
         try (
-                InputStreamReader isr = new InputStreamReader(Utility.class.getClassLoader().getResourceAsStream(fileName));
+                InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Utility.class.getClassLoader().getResourceAsStream(fileName)));
                 BufferedReader br = new BufferedReader(isr)
         ) {
             List<int[]> rows = new LinkedList<>();
