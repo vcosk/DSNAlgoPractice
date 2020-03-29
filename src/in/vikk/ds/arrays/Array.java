@@ -49,6 +49,17 @@ public class Array<T> implements Iterable<T> {
         }
     }
 
+    public void set(final int index, T data) {
+        if (index < 0 || index > this.length) {
+            throw new IllegalArgumentException("Index out of bound.");
+        }
+        
+        if (index == this.length) {
+            this.length += 1;
+        }
+        this.dataArray[index] = data;
+    }
+
     public int remove(final T data) {
         final int pos = indexOf(data);
         final T removedData = remove(pos);
@@ -91,6 +102,10 @@ public class Array<T> implements Iterable<T> {
 
     public int size() {
         return this.length;
+    }
+
+    public boolean isEmpty() {
+        return this.length == 0;
     }
 
     @Override
